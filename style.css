@@ -1,55 +1,202 @@
-/* General body styles */
+/* Base Styles */
 body {
-    font-family: "Pixelify Sans", sans-serif;
-    background-color: #D6C8FF;
-    color: #0004ff;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  font-family: "IBM Plex Mono", monospace;
+  background-color: #D6C8FF;
+  color: #0004ff;
+  overflow-x: hidden;
+}
+
+/* Navigation Bar */
+nav {
+  padding: 15px;
+  text-align: center;
+  border-bottom: 2px solid #0004ff;
+  position: relative;
+  z-index: 20;
+}
+
+.nav-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.nav-links li {
+  display: inline;
+  margin: 0 10px;
+}
+
+.nav-links a {
+  font-family: "Pixelify Sans", sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  color: #0004ff;
+  text-decoration: none;
+}
+
+.nav-links a:hover {
+  opacity: 0.7;
+}
+
+/* Main Content */
+main {
+  flex: 1;
+  display: none;
+  padding-bottom: 70px;
+}
+
+/* Quiz Container */
+#quiz-container {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#question-container {
+  margin-bottom: 20px;
+  min-height: 80px;
+  text-align: center;
+}
+
+#question-text {
+  font-size: 18px;
+  line-height: 1.5;
+}
+
+/* Options Container */
+#options-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.option-btn {
+  width: 100%;
+  padding: 12px;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 16px;
+  color: #0004ff;
+  background-color: #d6c8ff;
+  border: 2px solid #0004ff;
+  border-radius: 8px;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.3s ease;
+  opacity: 0;
+  transform: translateY(10px);
+  animation: fadeInUp .5s ease-out forwards;
+  margin: 8px 0;
+  transition: all .3s ease;
+}
+
+.option-btn:hover {
+  background-color: #0004ff;
+  color: #ffffff;
+}
+
+.option-btn.selected {
+  background-color: #0004ff;
+  color: #ffffff;
+}
+
+/* Navigation Buttons */
+.navigation-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  gap: 10px;
+}
+
+.nav-btn {
+  padding: 10px 20px;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 16px;
+  color: #0004ff;
+  background-color: #d6c8ff;
+  border: 2px solid #0004ff;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.nav-btn:hover {
+  background-color: #0004ff;
+  color: #ffffff;
+}
+
+/* Start Screen */
+#start-screen {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Start Button */
+#start-button {
+  font-family: "Pixelify Sans", sans-serif;
+  font-size: 18px;
+  padding: 12px 24px;
+  border: 2px solid #0004ff;
+  background-color: #D6C8FF;
+  color: #0004ff;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#start-button:hover {
+  background-color: #0004ff;
+  color: #ffffff;
+}
+
+/* Footer */
+footer {
+  /*position: fixed;*/
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 10px;
+  font-size: 14px;
+  font-family: "Pixelify Sans", sans-serif;
+  font-weight: 700;
+  color: #0004ff;
+  text-align: center;
+  border-top: 2px solid #0004ff;
+  background: #D6C8FF;
+  /* z-index: 10; */
+}
+
+/* Typing Effect (if you keep it) */
+.typing {
+  position: relative;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* Keyframes for fade + slight upward motion */
+@keyframes fadeInUp {
+  from {
+      opacity: 0;
+      transform: translateY(10px);
   }
-  
-  /* Navigation styling */
-  nav {
-    padding: 15px;
-    text-align: center;
-    border-bottom: 2px solid #0004ff; /* line separator */
+  to {
+      opacity: 1;
+      transform: translateY(0);
   }
-  
-  .nav-links {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  
-  .nav-links li {
-    display: inline;
-    margin: 0 10px;
-  }
-  
-  .nav-links a {
-    text-decoration: none;
-    font-weight: 700;
-    color: #0004ff;
-  }
-  
-  .nav-links a:hover {
-    opacity: 0.7; /* subtle hover effect */
-  }
-  
-  /* Main content placeholder */
-  main {
-    flex: 1;
-    padding: 20px;
-    text-align: center;
-  }
-  
-  /* Footer styling */
-  footer {
-    padding: 10px;
-    text-align: center;
-    font-size: 14px;
-    border-top: 2px solid #0004ff; /* line separator */
-  }
-  
+}
