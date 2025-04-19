@@ -12,13 +12,13 @@ const questions = [
   {
     question: "2. What's your go-to genre for escapism?",
     options: [
-      "Books that make me believe in love again (romance, romcoms, messy heartbreaks)",
-      "Magical worlds that let me forget reality (fantasy, romantasy, mythology)",
-      "Slow, sad, and beautifully written (literary fiction, poetry, lyrical prose)",
-      "Murder mystery but I'm cozy about it (whodunits, thrillers, dark academia)",
-      "Rebellions, kingdoms, and emotional damage (epic fantasy, dystopia, sci-fi)",
-      "Quiet towns hiding secrets (contemporary fiction, mystery, magical realism)",
-      "Historical settings I can mentally escape into (historical fiction, war novels, vintage drama)"
+      "Love stories – Romance, romcoms, heartbreaks",
+      "Fantasy escape – Magical worlds, mythology, romantasy",
+      "Poetic sadness – Literary fiction, lyrical prose, emotion-heavy",
+      "Cozy mystery – Whodunits, thrillers, dark academia",
+      "Epic drama – Rebellions, kingdoms, dystopia, sci-fi",
+      "Hidden secrets – Contemporary, magical realism, mystery",
+      "Historical vibes – War novels, vintage drama, period fiction"
     ]
   }
 ];
@@ -32,6 +32,7 @@ const prevBtn = document.getElementById("prev-btn");
 const quizContainer = document.querySelector("main");
 
 let currentQuestionIndex = 0;
+const userAnswers = new Array(questions.length).fill(null);
 
 // Start Quiz
 startBtn.addEventListener("click", () => {
@@ -59,23 +60,85 @@ function typeWriterEffect(text, callback) {
   }, 30);
 }
 
+function scoreQuiz(answers) {
+  // Placeholder for now
+  // Will process 'answers' to return a result
+}
+
 function displayQuestion(index) {
   optionsContainer.innerHTML = "";
 
+  // diable nav btn until type effect finishes
+  nextBtn.disabled = true;
+  nextBtn.disabled = true;
+
   if (index < questions.length) {
-    typeWriterEffect(questions[index].question, () => {
-      questions[index].options.forEach(option => {
-        const btn = document.createElement("button");
-        btn.textContent = option;
-        btn.classList.add("option-btn");
-        optionsContainer.appendChild(btn);
-        void btn.offsetWidth;
+    const question = questions[index];
+
+    typeWriterEffect(question.question, () => {
+      nextBtn.disabled = false;
+      if (index > 0) {
+        prevBtn.disabled = false;
+      }
+
+      question.options.forEach((option, i) => {
+        // Determine input type
+        let inputType;
+        if (question.type === "multiple") {
+          inputType = "checkbox";
+        } else {
+          inputType = "radio";
+        }
+
+        const inputId = "q" + index + "_opt" + i;
+
+        // Create input
+        const input = document.createElement("input");
+        input.type = inputType;
+        input.name = "question_" + index;
+        input.id = inputId;
+        input.value = option;
+        input.hidden = true;
+
+        // Create label styled like a button
+        const label = document.createElement("label");
+        label.setAttribute("for", inputId);
+        label.classList.add("option-btn");
+        label.textContent = option;
+
+        // For checkbox questions with a max limit
+        if (inputType === "checkbox") {
+          input.addEventListener("change", () => {
+            const selector = 'input[name="question_' + index + '"]:checked';
+            const selected = optionsContainer.querySelectorAll(selector);
+
+            if (question.max && selected.length > question.max) {
+              input.checked = false;
+              alert("You can only select up to " + question.max + " options for this question.");
+            }
+          });
+        }
+
+        optionsContainer.appendChild(input);
+        optionsContainer.appendChild(label);
       });
     });
   }
 
-  prevBtn.style.display = index === 0 ? "none" : "block";
-  nextBtn.textContent = index === questions.length - 1 ? "Finish" : "Next";
+  // Show or hide the Previous button
+  if (index === 0) {
+    prevBtn.style.display = "none";
+  } else {
+    prevBtn.style.display = "block";
+  }
+
+  // Change the text of the Next button
+  if (index === questions.length - 1) {
+    nextBtn.textContent = "Finish";
+  } else {
+    nextBtn.textContent = "Next";
+  }
+
 }
 
 // Navigation
@@ -84,21 +147,8 @@ nextBtn.addEventListener("click", () => {
     currentQuestionIndex++;
     displayQuestion(currentQuestionIndex);
   } else {
-    quizContainer.style.display = "none";
-
-    const message = document.createElement("h2");
-    message.textContent = "Quiz Completed";
-    message.style.fontFamily = "'IBM Plex Mono', monospace"; // Can remove if you'd rather default
-    message.style.textAlign = "center";
-    message.style.margin = "100px auto";
-    message.style.fontSize = "2rem";
-    message.style.color = "#0004ff";
-
-    const oldMessage = document.querySelector(".quiz-message");
-    if (oldMessage) oldMessage.remove();
-
-    message.classList.add("quiz-message");
-    document.body.appendChild(message);
+    document.getElementById("quiz-container").style.display = "none";
+    document.getElementById("result-message").style.display = "block";
   }
 });
 

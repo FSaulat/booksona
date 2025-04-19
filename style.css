@@ -1,4 +1,4 @@
-/* Base Styles */
+/* Base Layout */
 body {
   display: flex;
   flex-direction: column;
@@ -9,6 +9,12 @@ body {
   background-color: #D6C8FF;
   color: #0004ff;
   overflow-x: hidden;
+}
+
+.page-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 /* Navigation Bar */
@@ -43,11 +49,12 @@ nav {
   opacity: 0.7;
 }
 
-/* Main Content */
+/* Start & Quiz Content */
 main {
   flex: 1;
   display: none;
   padding-bottom: 70px;
+  overflow-y: auto;
 }
 
 /* Quiz Container */
@@ -58,79 +65,8 @@ main {
   display: flex;
   flex-direction: column;
   gap: 10px;
-}
-
-#question-container {
-  margin-bottom: 20px;
-  min-height: 80px;
-  text-align: center;
-}
-
-#question-text {
-  font-size: 18px;
-  line-height: 1.5;
-}
-
-/* Options Container */
-#options-container {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  width: 100%;
-}
-
-.option-btn {
-  width: 100%;
-  padding: 12px;
-  font-family: "IBM Plex Mono", monospace;
-  font-size: 16px;
-  color: #0004ff;
-  background-color: #d6c8ff;
-  border: 2px solid #0004ff;
-  border-radius: 8px;
-  cursor: pointer;
-  text-align: center;
-  transition: all 0.3s ease;
-  opacity: 0;
-  transform: translateY(10px);
-  animation: fadeInUp .5s ease-out forwards;
-  margin: 8px 0;
-  transition: all .3s ease;
-}
-
-.option-btn:hover {
-  background-color: #0004ff;
-  color: #ffffff;
-}
-
-.option-btn.selected {
-  background-color: #0004ff;
-  color: #ffffff;
-}
-
-/* Navigation Buttons */
-.navigation-buttons {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 20px;
-  gap: 10px;
-}
-
-.nav-btn {
-  padding: 10px 20px;
-  font-family: "IBM Plex Mono", monospace;
-  font-size: 16px;
-  color: #0004ff;
-  background-color: #d6c8ff;
-  border: 2px solid #0004ff;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.nav-btn:hover {
-  background-color: #0004ff;
-  color: #ffffff;
+  height: auto;
+  min-height: 60vh;
 }
 
 /* Start Screen */
@@ -142,9 +78,10 @@ main {
   padding: 40px;
   text-align: center;
   margin-bottom: 20px;
+  min-height: 80px;
+  text-align: center;
 }
 
-/* Start Button */
 #start-button {
   font-family: "Pixelify Sans", sans-serif;
   font-size: 18px;
@@ -158,13 +95,113 @@ main {
 }
 
 #start-button:hover {
+  background-color: #0004ff; /* electric blue */
+  color: #ffffff;            /* white text */
+  transform: scale(1.05);
+}
+
+
+.quiz-options {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.option-btn {
+  font-family: "IBM Plex Mono", monospace;
+  background-color: transparent;
+  color: #0004ff;
+  border: 2px solid #0004ff;
+  border-radius: 8px;
+  padding: 6px 10px;
+  font-size: 16px;
+  margin: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  width: 100%;
+  max-width: 500px;
+  text-align: center;
+  align-self: center;
+}
+
+.option-btn.selected {
   background-color: #0004ff;
   color: #ffffff;
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.option-btn:hover {
+  background-color: #0004ff;
+  color: #ffffff;
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Radio & Checkbox selected state styling */
+input[type="radio"]:checked + .option-btn,
+input[type="checkbox"]:checked + .option-btn {
+  background-color: #0004ff;
+  color: #ffffff;
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Visually hide native radio/checkbox inputs but keep them accessible */
+input[type="radio"],
+input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Navigation Buttons (Next, Previous, Finish) */
+.nav-btn {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 16px;
+  padding: 10px 20px;
+  margin: 10px;
+  border: 2px solid #0004ff;
+  border-radius: 8px;
+  background-color: #D6C8FF;
+  color: #0004ff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.nav-btn:hover {
+  background-color: #0004ff;
+  color: white;
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.navigation-buttons {
+  display: flex;
+  justify-content: space-between; /* <- this is the key change */
+  align-items: center;
+  width: 100%;
+  max-width: 600px;
+  margin: 20px auto 0;
+  padding: 0 10px;
+}
+
+
+
+#result-message h2 {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 2rem;
+  text-align: center;
+  color: #0004ff;
+  margin: 100px auto;
 }
 
 /* Footer */
 footer {
-  /*position: fixed;*/
+  margin-top: auto;
   bottom: 0;
   left: 0;
   right: 0;
@@ -176,10 +213,10 @@ footer {
   text-align: center;
   border-top: 2px solid #0004ff;
   background: #D6C8FF;
-  /* z-index: 10; */
+
 }
 
-/* Typing Effect (if you keep it) */
+/* Typing Animation */
 .typing {
   position: relative;
 }
@@ -189,14 +226,14 @@ footer {
   50% { opacity: 0; }
 }
 
-/* Keyframes for fade + slight upward motion */
+/* Fade In Animation */
 @keyframes fadeInUp {
   from {
-      opacity: 0;
-      transform: translateY(10px);
+    opacity: 0;
+    transform: translateY(10px);
   }
   to {
-      opacity: 1;
-      transform: translateY(0);
+    opacity: 1;
+    transform: translateY(0);
   }
 }

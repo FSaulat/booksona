@@ -8,12 +8,14 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&display=swap" rel="stylesheet">
 
   <!-- Your CSS stylesheet -->
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+  <div class="page-container">
   <!-- NAVIGATION BAR -->
   <nav>
     <ul class="nav-links">
@@ -32,12 +34,16 @@
         <p id="question-text"></p>
       </div>
       
-      <div id="options-container" class="btn-container"></div>
+      <div id="options-container" class="quiz-options"></div>
       
       <div class="navigation-buttons">
         <button id="prev-btn" class="nav-btn">Previous</button>
         <button id="next-btn" class="nav-btn">Next</button>
       </div>
+    </div>
+
+    <div id="result-message" style="display: none;">
+      <h2>Quiz Completed</h2>
     </div>
   
     <!-- Lofi Background Audio -->
@@ -48,6 +54,8 @@
   <footer>
     <p>© 2025 Faiyhaa Saulat · The Next Book</p>
   </footer>
+
+  </div>
 
   <!-- JavaScript -->
   <script src="script.js"></script>
