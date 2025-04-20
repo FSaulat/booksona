@@ -67,6 +67,7 @@ main {
   gap: 10px;
   height: auto;
   min-height: 60vh;
+  
 }
 
 /* Start Screen */
@@ -108,6 +109,30 @@ main {
   gap: 5px;
 }
 
+#question-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+
+#question-text {
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-align: left;        /* Keeps typewriter moving L->R */
+  width: 100%;             /* Make it take full row width */
+  max-width: 600px;        /* Optional, match your layout */
+  margin: 0;
+  margin-right: auto;      /* Left-align inside the centered wrapper */
+}
+
+
+
+
+
+
+
 .option-btn {
   font-family: "IBM Plex Mono", monospace;
   background-color: transparent;
@@ -124,6 +149,16 @@ main {
   max-width: 500px;
   text-align: center;
   align-self: center;
+ 
+  /* staggar animation*/
+  animation-name: dropdownStagger;
+  animation-duration: 350ms;
+  animation-delay: calc(var(--animation-order) * 100ms);
+  animation-fill-mode: both;
+  animation-timing-function: ease-in-out;
+
+  opacity: 0;
+  transform: scale(0.6) translateY(-8px);
 }
 
 .option-btn.selected {
@@ -199,6 +234,19 @@ input[type="checkbox"] {
   margin: 100px auto;
 }
 
+#validation-message {
+  color: #0004ff;
+  font-size: 14px;
+  text-align: center;
+  margin-top: 10px;
+  display: none;
+}
+
+#validation-message.visible {
+  display: block;
+}
+
+
 /* Footer */
 footer {
   margin-top: auto;
@@ -214,6 +262,14 @@ footer {
   border-top: 2px solid #0004ff;
   background: #D6C8FF;
 
+}
+
+.hidden {
+  display: none;
+}
+
+.visible {
+  display: block;
 }
 
 /* Typing Animation */
@@ -237,3 +293,17 @@ footer {
     transform: translateY(0);
   }
 }
+
+@keyframes dropdownStagger {
+  0% {
+    opacity: 0;
+    transform: scale(0.6) translateY(-8px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+
+

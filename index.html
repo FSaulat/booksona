@@ -30,11 +30,20 @@
 
   <main style="display: none;">
     <div id="quiz-container">
-      <div id="question-container">
+      <div id="question-wrapper">
         <p id="question-text"></p>
       </div>
       
       <div id="options-container" class="quiz-options"></div>
+      
+      <p id="validation-message" class="hidden">Please select an option before continuing.</p>
+      <p id="validation-topthree" class="hidden">
+        Please choose exactly <strong>three</strong> options in order of preference:<br>
+        <em>1st = your top favorite, 2nd = still love, 3rd = like but could live without.</em>
+      </p>
+      <p id="validation-choosethree" class="hidden">
+        Please select <strong>three</strong> options for this question. Please adjust your selection.
+      </p>
       
       <div class="navigation-buttons">
         <button id="prev-btn" class="nav-btn">Previous</button>
@@ -43,7 +52,7 @@
     </div>
 
     <div id="result-message" style="display: none;">
-      <h2>Quiz Completed</h2>
+      <h2>Quiz Completed!!!</h2>
     </div>
   
     <!-- Lofi Background Audio -->
