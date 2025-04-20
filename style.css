@@ -11,6 +11,10 @@ body {
   overflow-x: hidden;
 }
 
+.page-container{
+   animation: fadeIn 2.5s; 
+}
+
 .page-container {
   display: flex;
   flex-direction: column;
@@ -118,8 +122,8 @@ main {
 
 #question-text {
   display: block;
-  white-space: nowrap;
-  overflow: hidden;
+  white-space: normal;
+  overflow-wrap: break-word;
   text-align: left;        /* Keeps typewriter moving L->R */
   width: 100%;             /* Make it take full row width */
   max-width: 600px;        /* Optional, match your layout */
@@ -283,15 +287,9 @@ footer {
 }
 
 /* Fade In Animation */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
 }
 
 @keyframes dropdownStagger {
