@@ -38,7 +38,7 @@ const questions = [
     ]
   },
   {
-    question: "4. What are some things you need in a book?<br>Rank your top 3 (1 = must-have, 3 = still appreciated)",
+    question: "4. What are some things you need in a book?             Rank your top 3 (1 = must-have, 3 = still appreciated)",
     type: "multiple",
     typeDetail: "ranked",
     max: 3,
@@ -443,12 +443,6 @@ function handleCheckboxLimit(input, question, index, optionsContainer) {
 
 // Shows/hides the Next/Previous buttons appropriately
 function updateNavigationButtons(index, totalQuestions) {
-  if (index === 0) {
-    prevBtn.style.display = "none";
-  } else {
-    prevBtn.style.display = "block";
-  }
-
   const isLastQuestion = index === totalQuestions - 1; // Check if this is the final question
 
   if (isLastQuestion) {
@@ -459,22 +453,33 @@ function updateNavigationButtons(index, totalQuestions) {
 
 }
 
+// Controls the visibility of the Next and Previous buttons
 function toggleNavButtons(show) {
+  // If 'show' is true, make the buttons visible
   if (show) {
-    nextBtn.classList.add('visible');
-    nextBtn.classList.remove('hidden');
+    // Show the "Next" button
+    nextBtn.classList.add('visible');   // Add the 'visible' class for display/transition
+    nextBtn.classList.remove('hidden'); // Remove the 'hidden' class if it exists
+
+    // Conditionally show the "Previous" button only if we're not on the first question
     if (currentQuestionIndex > 0) {
-      prevBtn.classList.add('visible');
+      prevBtn.classList.add('visible');    // Show "Previous" button
       prevBtn.classList.remove('hidden');
+    } else {
+      // If we're on the first question, make sure the "Previous" button is hidden
+      prevBtn.classList.remove("visible");
+      prevBtn.classList.add("hidden");
     }
+
   } else {
+    // If 'show' is false, hide both navigation buttons
     nextBtn.classList.remove('visible');
     nextBtn.classList.add('hidden');
+
     prevBtn.classList.remove('visible');
     prevBtn.classList.add('hidden');
   }
 }
-
 
 
 // Shows or hides a validation message if user didn't select an answer
